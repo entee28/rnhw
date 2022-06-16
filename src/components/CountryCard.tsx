@@ -1,12 +1,6 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  Touchable,
-  TouchableOpacity,
-} from 'react-native';
-import React from 'react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList} from '../../App';
 
 interface Props extends NativeStackScreenProps<RootStackParamList, 'Home'> {
@@ -24,7 +18,7 @@ const CountryCard = ({code, name, capital, emoji, navigation}: Props) => {
           code,
         });
       }}>
-      <View style={styles.container}>
+      <View style={[styles.container, styles.shadowProp]}>
         <View>
           <Text style={styles.flag}>{emoji}</Text>
         </View>
@@ -43,17 +37,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     flexDirection: 'row',
     alignItems: 'center',
+    borderRadius: 8,
+    marginTop: 8,
     borderWidth: 1,
-
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
+  },
+  shadowProp: {
+    shadowColor: '#171717',
+    shadowOffset: {width: -2, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   flag: {
     fontSize: 60,

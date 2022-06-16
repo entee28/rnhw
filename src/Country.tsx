@@ -1,6 +1,13 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
-import {StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from 'react-native';
 import {RootStackParamList} from '../App';
 import {useGetCountryQuery} from './generated/graphql';
 
@@ -32,7 +39,14 @@ const Country = ({route, navigation}: Props) => {
       </View>
       <View style={styles.info}>
         <Text>continent</Text>
-        <Text>{data?.country?.continent.name}</Text>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.push('Continent', {
+              code: data!.country!.continent.code,
+            });
+          }}>
+          <Text style={styles.continent}>{data?.country?.continent.name}</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -57,6 +71,10 @@ const styles = StyleSheet.create({
   info: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  continent: {
+    color: 'blue',
+    textDecorationLine: 'underline',
   },
 });
 
