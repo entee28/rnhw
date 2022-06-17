@@ -2,15 +2,24 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList} from '../../App';
+import {ITheme} from '../theme/themes';
 
 interface Props extends NativeStackScreenProps<RootStackParamList, 'Home'> {
   code: string;
   name: string;
   capital: string | undefined | null;
   emoji: string;
+  colors: ITheme;
 }
 
-const CountryCard = ({code, name, capital, emoji, navigation}: Props) => {
+const CountryCard = ({
+  code,
+  name,
+  capital,
+  emoji,
+  navigation,
+  colors,
+}: Props) => {
   return (
     <TouchableOpacity
       onPress={() => {
@@ -18,13 +27,29 @@ const CountryCard = ({code, name, capital, emoji, navigation}: Props) => {
           code,
         });
       }}>
-      <View style={[styles.container, styles.shadowProp]}>
+      <View
+        style={[
+          styles.container,
+          styles.shadowProp,
+          {
+            backgroundColor: colors.background,
+            borderColor: colors.text,
+          },
+        ]}>
         <View>
           <Text style={styles.flag}>{emoji}</Text>
         </View>
         <View style={styles.info}>
-          <Text style={styles.header}>{name}</Text>
-          <Text style={styles.capital}>{capital}</Text>
+          <Text style={[styles.header, {color: colors.text}]}>{name}</Text>
+          <Text
+            style={[
+              styles.capital,
+              {
+                color: colors.text,
+              },
+            ]}>
+            {capital}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
